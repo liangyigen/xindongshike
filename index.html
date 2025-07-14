@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>薪动时刻 - 带薪休摸鱼财富幻觉模拟器</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 财富之晨启动屏 -->
+    <div id="wealth-morning" class="wealth-morning hidden">
+        <div class="money-animation-container">
+            <canvas id="money-canvas"></canvas>
+            <div class="wealth-label">
+                <h1>💰 财富源泉正在为您持续创造价值 💰</h1>
+                <p>您的摸鱼时光，就是财富增长时光</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主界面 -->
+    <div id="main-app" class="main-app">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="creator-tag">@小怀AI智造局</div>
+            <h1 class="app-title">💼 薪动时刻</h1>
+            <p class="app-subtitle">带薪休摸鱼财富幻觉模拟器</p>
+            <button id="boss-mode-btn" class="boss-mode-btn">🚨 老板键</button>
+        </header>
+
+        <!-- 财富面板 -->
+        <div class="wealth-dashboard">
+            <div class="wealth-card main-wealth">
+                <h2>今日累计摸鱼财富</h2>
+                <div class="wealth-amount">
+                    <span id="currency-symbol">¥</span>
+                    <span id="total-wealth">0.00</span>
+                </div>
+                <div class="wealth-growth">+<span id="wealth-growth">0.00</span></div>
+                <div class="countdown-text" id="countdown-text">还有8小时0分钟就能下班</div>
+            </div>
+
+            <div class="wealth-stats">
+                <div class="stat-card">
+                    <h3>当前时薪</h3>
+                    <div class="stat-value">
+                        <span id="hourly-rate-display">¥50.00</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>今日摸鱼时长</h3>
+                    <div class="stat-value">
+                        <span id="work-time">0小时0分钟</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>今日工作时长</h3>
+                    <div class="stat-value">
+                        <span id="total-work-time">0小时0分钟</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设置面板 -->
+        <div class="settings-panel">
+            <h2>设置配置</h2>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label for="salary-type">薪资类型:</label>
+                    <select id="salary-type">
+                        <option value="月薪">月薪</option>
+                        <option value="年薪">年薪</option>
+                        <option value="时薪">时薪</option>
+                        <option value="日薪">日薪</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="salary-amount">薪资金额:</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="salary-amount" placeholder="请输入月薪（如：10000）" value="10000" min="0" step="100">
+                        <span class="input-unit">¥</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="work-days">每周工作天数:</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="work-days" value="5" min="1" max="7" step="1">
+                        <span class="input-unit">天</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="work-hours">每日工作时长:</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="work-hours" value="8" min="1" max="24" step="0.5">
+                        <span class="input-unit">小时</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="work-start-time">上班时间:</label>
+                    <input type="time" id="work-start-time" value="09:00">
+                </div>
+
+            </div>
+            <div class="settings-buttons">
+                <button id="save-settings" class="save-btn">保存设置</button>
+                <button id="restore-defaults" class="default-btn">恢复默认</button>
+                <button id="fish-toggle" class="fish-btn">🐟 开始摸鱼</button>
+                <button id="end-fish" class="end-fish-btn">📋 结束摸鱼</button>
+            </div>
+        </div>
+
+        <!-- 免责声明 -->
+        <div class="disclaimer">
+            <p>⚠️ 本工具仅供娱乐，所有财富数据均为虚拟模拟，请勿当真！</p>
+        </div>
+    </div>
+
+    <!-- 老板模式伪装界面 -->
+    <div id="boss-mode" class="boss-mode hidden">
+        <div class="fake-interface">
+            <div class="fake-header">
+                <h2>📊 Q4季度业务分析报告 - 数据处理中...</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="fake-content">
+                <div class="fake-chart">
+                    <canvas id="fake-chart-canvas"></canvas>
+                </div>
+                <div class="fake-data">
+                    <h3>关键业务指标</h3>
+                    <table>
+                        <tr><td>客户满意度</td><td>94.2%</td></tr>
+                        <tr><td>市场份额增长</td><td>+12.8%</td></tr>
+                        <tr><td>运营效率</td><td>87.5%</td></tr>
+                        <tr><td>成本优化</td><td>-8.3%</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="fake-footer">
+                <p>正在加载详细分析数据... 预计完成时间: 3分钟</p>
+                <button id="exit-boss-mode" class="exit-btn">返回工作台</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 摸鱼总结弹窗 -->
+    <div id="work-summary-modal" class="work-summary-modal hidden">
+        <div class="summary-content">
+            <div class="summary-header">
+                <h2>今日摸鱼总结</h2>
+            </div>
+            <div class="summary-body">
+                <div class="summary-item">
+                    <span class="summary-label">恭喜您，今日摸鱼已赚取</span>
+                    <span class="summary-value" id="summary-wealth">¥0.72</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">总摸鱼时长:</span>
+                    <span class="summary-value" id="summary-work-time">00:01:17</span>
+                </div>
+                <div class="summary-message">
+                    摸鱼辛苦了！
+                </div>
+            </div>
+            <div class="summary-footer">
+                <button id="close-summary" class="close-summary-btn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 工作emoji装饰 -->
+    <div id="work-emojis" class="work-emojis"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
